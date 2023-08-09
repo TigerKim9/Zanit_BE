@@ -26,10 +26,6 @@ public class User extends BaseTimeEntity{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userUid;
 	
-	//회원아이디
-	@Column(unique = true)
-	private String userId;
-	
 	//회원 비밀번호
 	private String userPassword;
 	

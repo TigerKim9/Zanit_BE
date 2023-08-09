@@ -15,11 +15,10 @@ import lombok.ToString;
 @Builder
 public class UserDTO{
 
+	UserDTO(){}
+	
 	//회원 고유번호
 	private Long userUid;
-	
-	//회원아이디
-	private String userId;
 	
 	//회원 비밀번호
 	private String userPassword;
@@ -34,7 +33,7 @@ public class UserDTO{
 	private String userPhone;
 	
 	//회원 성별
-	private boolean userGender;
+	private boolean userGender;	//0 : 여		1: 남
 	
 	//본인인증 여부
 	private boolean kyc;

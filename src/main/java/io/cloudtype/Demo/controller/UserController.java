@@ -9,11 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
 
-	@GetMapping("/mycoupon")
-	public String myCoupon(Model model) {
-		
-		return "mycoupon";
-		
-	}
+//	@PostMapping("/login")
 	
 }

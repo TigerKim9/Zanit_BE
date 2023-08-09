@@ -7,9 +7,11 @@ import io.cloudtype.Demo.dto.UserDTO;
 import io.cloudtype.Demo.entity.User;
 import io.cloudtype.Demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
 	
 	private final UserRepository userRepository;
@@ -21,9 +23,9 @@ public class UserService {
 	
 	
 	//중복아이디 체크
-	public int idCheck(String userId) {
-		int cnt = userRepository.countByUserId(userId);
-		
+	public int idCheck(String email) {
+		int cnt = userRepository.countByEmail(email);
+		log.info("idCheck = {}",cnt);
 		//검색기록 TODO
 //		userRepository.searchLog(userId);
 		return cnt;
@@ -31,6 +33,7 @@ public class UserService {
 //	
 	// 회원가입
 	// ROLE_MEMBER 권한 부여
+	
 	@Transactional
 	public void addMember(UserDTO userDTO) {
 		userDTO.setUserPassword(passwordEncoder.encode(userDTO.getUserPassword()));

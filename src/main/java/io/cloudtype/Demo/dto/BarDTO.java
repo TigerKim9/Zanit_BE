@@ -1,32 +1,24 @@
 package io.cloudtype.Demo.dto;
 
-import javax.persistence.ConstraintMode;
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import java.util.List;
 
 import io.cloudtype.Demo.entity.Bar;
 import io.cloudtype.Demo.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 //바 Entity
 @Getter
-@Entity
+@Setter
 @ToString
 @AllArgsConstructor
 @Builder
 public class BarDTO {
 
 	//바 고유번호
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long barUid;
 	
 	//바 이름
@@ -38,9 +30,10 @@ public class BarDTO {
 	//바 분위기
 	private String barMood;
 	
+	//바에 있는 칵테일
+	private List<CocktailDTO> barsCocktail;
+	
 	//바 주인 (유저)
-	@ManyToOne
-	@JoinColumn(name="bar_owner",foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	private User barOwner;
 	
 	//바 전화번호

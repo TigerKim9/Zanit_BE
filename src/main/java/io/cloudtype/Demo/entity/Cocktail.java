@@ -39,6 +39,9 @@ public class Cocktail {
 	//칵테일 설명
 	private String cocktailDetail;
 	
+	//사용자 추천 유형
+	private int recoUser;	//	0: 입문자	1: 캐쥬얼드링커 2: 헤비드링커
+	
 	//칵테일 가격
 	private int cocktailPrice;
 	
@@ -48,6 +51,7 @@ public class Cocktail {
 				.barUid(barUid)
 				.cocktailName(cocktailName)
 				.cocktailDetail(cocktailDetail)
+				.recoUser(recoUser)
 				.cocktailPrice(cocktailPrice)
 				.build();
 	}

@@ -7,14 +7,22 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import lombok.RequiredArgsConstructor;
+
 @Configuration
+@RequiredArgsConstructor
 @EnableWebSecurity
 public class SecurityConfig{
-	private CustomUserDetailsService customUserDetailsService;
+	
+	private final CorsConfig corsConfig;
+	private final CustomUserDetailsService customUserDetailsService;
 	
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http	
+        .csrf().disable()
+        .addFilter(corsConfig.corsFilter())
+        .authorizeRequests()
 //                .antMatchers("/design","orders")
 //                .hasRole("USER")
      // ↓ /sample/admin/**  주소로 들어오는 요청은 '인증' 뿐 아니라 ROLE_ADMIN 권한을 갖고 있어야 한다 ('인가')
@@ -26,7 +34,7 @@ public class SecurityConfig{
                 .and()
                 .formLogin()
 				.loginPage("/login")
-				.usernameParameter("userid")
+				.usernameParameter("useremail")
 				.passwordParameter("userpassword")
 				.loginProcessingUrl("/loginOk")
 				.defaultSuccessUrl("/")

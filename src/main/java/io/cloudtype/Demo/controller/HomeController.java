@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class HomeController {
 	
-	//첫 메인화
+	//첫 메인화면
 	@GetMapping("/home")
 	public String home(Model model) {
 		

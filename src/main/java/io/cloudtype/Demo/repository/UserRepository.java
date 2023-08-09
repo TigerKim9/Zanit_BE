@@ -15,7 +15,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	
 	int countByUserId(String userId);
 	
-	List<User> findByEmail(String email);
+	int countByEmail(String email);
+	
+	User findByEmail(String email);
 	
 	// 특정 id 의 권한(들) 정보 가져오기
 	List<String> findAuthoritiesByUserUid(Long userUid);

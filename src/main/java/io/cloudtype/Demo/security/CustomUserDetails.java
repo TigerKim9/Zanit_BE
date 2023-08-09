@@ -23,7 +23,7 @@ public class CustomUserDetails implements UserDetails {
 	private User user;
 
 	public CustomUserDetails(User user) {
-		System.out.println("PrincipalDetails(user) 생성: " + user);
+		log.info("PrincipalDetails(user) 생성: {}",user);
 		this.user = user;
 	}
 

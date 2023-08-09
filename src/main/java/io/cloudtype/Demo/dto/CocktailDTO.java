@@ -29,6 +29,9 @@ public class CocktailDTO {
 	//칵테일 설명
 	private String cocktailDetail;
 	
+	//사용자 추천 유형
+	private int recoUser;
+	
 	//칵테일 가격
 	private int cocktailPrice;
 	
@@ -38,6 +41,7 @@ public class CocktailDTO {
 				.barUid(barUid)
 				.cocktailName(cocktailName)
 				.cocktailDetail(cocktailDetail)
+				.recoUser(recoUser)
 				.cocktailPrice(cocktailPrice)
 				.build();
 	}
