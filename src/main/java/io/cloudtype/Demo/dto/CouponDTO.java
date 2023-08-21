@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-//바 Entity
+//쿠폰 DTO
 @Getter
 @Setter
 @ToString
@@ -36,6 +36,9 @@ public class CouponDTO extends BaseTimeEntity{
 	//사용된 칵테일
 	private Cocktail usedCocktail;
 	
+	//커버차지 비용
+	private int coverCharge;
+	
 	
 	//쿠폰 유효기간
 	private LocalDateTime exp_date;
@@ -49,6 +52,7 @@ public class CouponDTO extends BaseTimeEntity{
 				.userUid(userUid)
 				.usedBar(usedBar)
 				.usedCocktail(usedCocktail)
+				.coverCharge(coverCharge)
 				.exp_date(exp_date)
 				.used(used)
 				.build();

@@ -56,6 +56,14 @@ public class CocktailService {
 		}
 		return cocktailList;
 	}
+	
+	public Long registCocktail(CocktailDTO cocktailDTO) {
+		
+		Cocktail cocktail = cocktailDTO.toEntity();
+		//TODO 세이브 후 바로 반영이 되었나 확인하기
+		Long result = cocktailRepository.save(cocktail).getCocktailUid();
+		return result;
+	}
 }
 
 

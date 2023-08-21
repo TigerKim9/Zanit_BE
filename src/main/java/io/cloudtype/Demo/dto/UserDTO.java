@@ -26,8 +26,6 @@ public class UserDTO{
 	//회원 이름
 	private String userName;
 	
-	//회원 이메일
-	private String email;
 	
 	//회원 전화번호
 	private String userPhone;
@@ -49,7 +47,6 @@ public class UserDTO{
 				.userUid(userUid)
 				.userPassword(userPassword)
 				.userName(userName)
-				.email(email)
 				.userPhone(userPhone)
 				.kyc(kyc)
 				.marketing(marketing)

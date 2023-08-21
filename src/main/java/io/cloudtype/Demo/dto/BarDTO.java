@@ -2,19 +2,23 @@ package io.cloudtype.Demo.dto;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import io.cloudtype.Demo.entity.Bar;
 import io.cloudtype.Demo.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-//바 Entity
+//바 DTO
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class BarDTO {
 
@@ -26,6 +30,9 @@ public class BarDTO {
 	
 	//바 위치
 	private String barLocation;
+	
+	//바 사진 직접적인 파일..
+	private List<MultipartFile> barPics;
 	
 	//바 분위기
 	private String barMood;

@@ -29,11 +29,11 @@ public class CustomUserDetailsService implements UserDetailsService{
 	// UserDetails 를 리턴한다 --> 누구한테 리턴하나?
 	// 시큐리티 sesssion (<= Authentication(<= 리턴된 UserDetails))
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
 //		System.out.println("loadUserByUsername(" + username + ")");
-		loggger.info("loadUserByUsername({})", email);
+		loggger.info("loadUserByUsername({})", phone);
 		
-		User user = userRepository.findByEmail(email);
+		User user = userRepository.findByUserPhone(phone);
 		
 		// 해당 id 의 user 가 있다면
 		if(user != null) {

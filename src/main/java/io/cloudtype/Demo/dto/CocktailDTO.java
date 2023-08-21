@@ -1,11 +1,14 @@
 package io.cloudtype.Demo.dto;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import io.cloudtype.Demo.entity.Bar;
 import io.cloudtype.Demo.entity.Cocktail;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -17,8 +20,6 @@ import lombok.ToString;
 @Builder
 public class CocktailDTO {
 
-	//칵테일 고유번호
-	private Long cocktailUid;
 	
 	//칵테일이 있는 바
 	private Bar barUid;
@@ -35,14 +36,19 @@ public class CocktailDTO {
 	//칵테일 가격
 	private int cocktailPrice;
 	
+	//칵테일 사진
+	private MultipartFile cocktailPic;
+	
+	private boolean activated;
+	
 	public Cocktail toEntity() {
 		return Cocktail.builder()
-				.cocktailUid(cocktailUid)
 				.barUid(barUid)
 				.cocktailName(cocktailName)
 				.cocktailDetail(cocktailDetail)
 				.recoUser(recoUser)
 				.cocktailPrice(cocktailPrice)
+				.activated(activated)
 				.build();
 	}
 }

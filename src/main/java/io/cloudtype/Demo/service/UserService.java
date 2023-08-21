@@ -1,4 +1,6 @@
 package io.cloudtype.Demo.service;
+import java.util.Map;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,8 +25,8 @@ public class UserService {
 	
 	
 	//중복아이디 체크
-	public int idCheck(String email) {
-		int cnt = userRepository.countByEmail(email);
+	public int idCheck(String phone) {
+		int cnt = userRepository.countByUserPhone(phone);
 		log.info("idCheck = {}",cnt);
 		//검색기록 TODO
 //		userRepository.searchLog(userId);
@@ -40,9 +42,27 @@ public class UserService {
 		User user = userDTO.toEntity();
 		
 		userRepository.save(user);
+		
 //		userRepository.addAuth(user.getUserId(), "ROLE_MEMBER");
 		
 	}
+	
+	public int resetPw(Map<String,Object> pw) {
+		//TODO 향후 DTO 따로 제작해주기? 고민 중
+		int result = 0;
+		int userUid = (Integer)pw.get("userUid");
+		String newPw = (String)pw.get("passWord");
+		User user = userRepository.findById((long)userUid).get();
+		UserDTO userDTO = user.toDto();
+		userDTO.setUserPassword(newPw);
+		user = userDTO.toEntity();
+		userRepository.saveAndFlush(user);
+		if(user.getUserPassword().equals(newPw)){
+			result = 1;
+		}
+		return result;
+	}
+	
 	
 	//나의 구독여부 조회
 //	

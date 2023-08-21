@@ -1,5 +1,6 @@
 package io.cloudtype.Demo.entity;
 
+import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -8,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.ColumnDefault;
 
 import io.cloudtype.Demo.dto.CocktailDTO;
 import lombok.AllArgsConstructor;
@@ -45,14 +48,17 @@ public class Cocktail {
 	//칵테일 가격
 	private int cocktailPrice;
 	
+	@Column(columnDefinition = "0")
+	private boolean activated;
+	
 	public CocktailDTO toDto() {
 		return CocktailDTO.builder()
-				.cocktailUid(cocktailUid)
 				.barUid(barUid)
 				.cocktailName(cocktailName)
 				.cocktailDetail(cocktailDetail)
 				.recoUser(recoUser)
 				.cocktailPrice(cocktailPrice)
+				.activated(activated)
 				.build();
 	}
 }

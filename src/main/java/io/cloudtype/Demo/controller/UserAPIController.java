@@ -2,16 +2,20 @@ package io.cloudtype.Demo.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.cloudtype.Demo.dto.CouponDTO;
 import io.cloudtype.Demo.dto.UserDTO;
 import io.cloudtype.Demo.entity.User;
 import io.cloudtype.Demo.repository.UserRepository;
+import io.cloudtype.Demo.security.CustomUserDetails;
+import io.cloudtype.Demo.service.CouponService;
 import io.cloudtype.Demo.service.UserService;
 import kr.co.bootpay.Bootpay;
 import lombok.RequiredArgsConstructor;
@@ -28,15 +32,17 @@ public class UserAPIController {
 	
 	private final UserService userService;
 	
+	private final CouponService couponService;
+	
 	
 	
 	
 	@PostMapping("/signup")
 	public int signup(@RequestBody UserDTO userDTO) {
-		int idCheck = userService.idCheck(userDTO.getEmail());
+		int idCheck = userService.idCheck(userDTO.getUserPhone());
 		if(idCheck > 0) return -1;
 		userService.addMember(userDTO);
-		int result = userRepository.countByEmail(userDTO.getEmail());
+		int result = userRepository.countByUserPhone(userDTO.getUserPhone());
 		return result;	//0 : 회원가입 실패	1 : 회원가입 성공
 		
 	}
@@ -44,15 +50,35 @@ public class UserAPIController {
 	@GetMapping("/testapi")
 	public User testapi(String email) {
 		System.out.println("들어옴");
-		User user = userRepository.findByEmail(email);
+		User user = userRepository.findByUserPhone(email);
 		log.info("[FindSome]: " + user);
 		return user;
 	}
 	
-	@GetMapping("/testapi2")
-	public String testapi2(String email) {
+	//유저 내 쿠폰 함
+	@PostMapping("/couponList")
+	public List<CouponDTO> couponList(String email,
+			@AuthenticationPrincipal CustomUserDetails user) {
+//		if(user == null) {
+//			return null;
+//		}
 		log.info("들어옴");
-		return "api 연결";
+		List<CouponDTO> couponList = couponService.couponList(user.getUser().getUserUid());
+		return couponList;
+	}
+	
+	@PostMapping("/findPw")
+	public int findPw(String phoneNumber) {
+		int idCheck = userService.idCheck(phoneNumber);
+		if(idCheck > 0) return -1;
+		//TODO 카카오톡으로 어떻게 넘길건데....
+		return 0;
+	}
+	
+	@PostMapping("/resetPw")
+	public int resetPw(@RequestBody Map<String,Object> pw) {
+		int result = userService.resetPw(pw);
+		return result;
 	}
 	
 	@PostMapping("/subscribePay")

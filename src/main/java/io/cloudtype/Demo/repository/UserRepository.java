@@ -11,13 +11,12 @@ import io.cloudtype.Demo.entity.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 //	List<User> findFirst2ByUserNameLikeOrderByUserIdDesc(String name);
-	User findByUserId(String id);
 	
-	int countByUserId(String userId);
+	int countByUserUid(Long id);
 	
-	int countByEmail(String email);
+	int countByUserPhone(String userPhone);
 	
-	User findByEmail(String email);
+	User findByUserPhone(String userPhone);
 	
 	// 특정 id 의 권한(들) 정보 가져오기
 	List<String> findAuthoritiesByUserUid(Long userUid);

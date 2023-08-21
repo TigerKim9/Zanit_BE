@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import io.cloudtype.Demo.dto.CouponDTO;
@@ -31,8 +33,8 @@ public class CouponService {
 
 	}
 
-	// 유저에 쿠폰 전체 조회
-	public List<CouponDTO> CouponList(Long userUid) {
+	// 유저의 쿠폰 전체 조회
+	public List<CouponDTO> couponList(Long userUid) {
 
 		if (checkSubscribe(userUid)) {
 
@@ -71,6 +73,7 @@ public class CouponService {
 
 	// 유저가 쿠폰 사용하기
 	// 사용 성공여부 반환
+	@Transactional
 	public boolean useCoupon(Long userUid, Bar barUid, Cocktail cocktailUid, Long couponUid) {
 
 		// TODO 향후 시간 로직에 따른 쿠폰 변경 필요할 듯함.

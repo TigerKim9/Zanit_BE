@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 //유저 Entity
@@ -18,6 +19,7 @@ import lombok.ToString;
 @Entity
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class User extends BaseTimeEntity{
 
@@ -31,10 +33,6 @@ public class User extends BaseTimeEntity{
 	
 	//회원 이름
 	private String userName;
-	
-	//회원 이메일
-	@Column(unique = true)
-	private String email;
 	
 	//회원 전화번호
 	@Column(unique = true)
@@ -52,12 +50,14 @@ public class User extends BaseTimeEntity{
 	//구독여부
 	private boolean subscribe;
 	
+	//계정 권한
+	private String role;
+	
 	public UserDTO toDto() {
 		return UserDTO.builder()
 				.userUid(userUid)
 				.userPassword(userPassword)
 				.userName(userName)
-				.email(email)
 				.userPhone(userPhone)
 				.kyc(kyc)
 				.marketing(marketing)

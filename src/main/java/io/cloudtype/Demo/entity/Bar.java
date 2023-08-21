@@ -34,6 +34,7 @@ public class Bar {
 	//바 이름
 	private String barName;
 	
+	
 	//바 위치
 	private String barLocation;
 	

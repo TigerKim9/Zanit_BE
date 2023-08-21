@@ -52,6 +52,8 @@ public class Coupon extends BaseTimeEntity{
 	@JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	private Cocktail usedCocktail;
 	
+	//커버차지 비용
+	private int coverCharge;
 	
 	//쿠폰 유효기간
 	private LocalDateTime exp_date;
@@ -78,6 +80,7 @@ public class Coupon extends BaseTimeEntity{
 				.userUid(userUid)
 				.usedBar(usedBar)
 				.usedCocktail(usedCocktail)
+				.coverCharge(coverCharge)
 				.exp_date(exp_date)
 				.used(used)
 				.build();
