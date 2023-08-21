@@ -1,45 +1,190 @@
-<br/>
-<br/>
-
-<p align="center">
-<img src="https://files.cloudtype.io/logo/cloudtype-logo-horizontal-black.png" width="50%" alt="Cloudtype"/>
-</p>
-
-<br/>
-<br/>
-
-# Spring Boot
-
-Java로 구현된 Spring Boot 어플리케이션 템플릿입니다.
-## 🖇️ 준비 및 확인사항
-
-### 지원 Java 버전
-- 8, 11, 17, 18, 19
-- Spring Boot 버전별 필요 Java 사양
-  - Spring Boot 3.x: Java 17 이상
-  - Spring Boot 2.x: Java 8 이상
-- ⚠️ 로컬/테스트 환경과 클라우드타입에서 설정한 Node 버전이 상이한 경우 정상적으로 빌드되지 않을 수 있습니다.
-
-### 패키지 명세
-- 빌드 시 어플리케이션에 사용된 패키지를 설치하기 위해서는 `build.gradle` 혹은 `pom.xml` 파일에 올바르게 내용이 작성되어 있어야 합니다.
+ ---
+>#### (유저) 유저 회원가입
 
 
-## 🏷️ 환경변수
+POST `/signup`
 
-- `SPRING_PROFILES_ACTIVE`: 배포 프로필 설정
-- `TZ`: 타임존 설정
-
-
-## 💬 문제해결
-
-- [클라우드타입 Docs](https://docs.cloudtype.io/)
-
-- [클라우드타입 FAQ](https://help.cloudtype.io/guide/faq)
-
-- [Discord](https://discord.gg/U7HX4BA6hu)
+```js
+user = {
+        'userPhone' : String,
+        'userPassword' : String,
+        'userName' : String,
+        'userGender' : boolean //0 : 여         1 : 남,
+        'marketing' : boolean // 0 : 미동의     1:동의
+}
 
 
-## 📄 License
+```
+<span style="color:brown">`리턴값`</span>
+|<span style="color:red"> -1 </span>| <span style="color:red">0 </span>| 1 |
+| --- | --- | --- |
+| <span style="color:red">이미 존재하는 아이디</span> | <span style="color:red">회원가입 실패</span> | 회원가입 성공 |
 
-[Apache-2.0](https://github.com/spring-projects/spring-boot/blob/main/LICENSE.txt)
+- - -
+<br>
 
+>#### (유저)구독결제(bootPay)
+
+POST `/subscribePay`
+```js
+
+```
+
+---
+<br>
+
+> #### (유저)클릭한 바 하나의 정보
+
+GET `/barInfo`
+
+```js
+barId = {
+        'barId' : Long,
+}
+```
+<span style="color:brown">`리턴값`</span>
+
+```js
+result.barUid           //Long 바 고유번호
+result.barName          //String 바 이름
+result.barLocation      //String 바 위치
+result.barPics          //Multipartfile 바 사진 리스트
+result.barMood          //바 분위기
+result.barsCocktail     //바에 있는 칵테일 리스트
+result.barPhone
+
+```
+
+---
+<br>
+
+> #### (유저)칵테일 전체 리스트
+
+GET `/getCocktailList`
+
+```js
+보낼 값 없음.
+```
+<span style="color:brown">`리턴값`</span>
+
+```js
+result.barUid                   //Long 칵테일이 있는 바
+result.cocktailName             //String 칵테일 이름
+result.cocktailDetail           //String 칵테일 설명
+result.recoUser                 //int 사용자 추천 유형
+result.cocktailPrice            //int 칵테일 가격
+result.cocktailPic              //MultiPartfile칵테일 사진
+
+```
+
+---
+<br>
+
+> #### (유저)쿠폰 사용하기
+
+POST `/couponUse`
+
+```js
+coupon = {
+        "couponUid" : Long,
+        "userUid" : Long,      //백에서 로그인된 유저값을 넣을 수도 있음...향후 결정
+        "usedBar" : Long,
+        "usedCocktail" : Long,
+        "coverCharge" : int,
+
+}
+```
+<span style="color:brown">`리턴값`</span>
+
+| <span style="color:red">0 </span>| 1 |
+| --- | --- |
+| <span style="color:red">사용 실패</span> | 사용 성공 |
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+> #### (관리자)바 등록
+
+POST `/registBar`
+```js
+bar = {
+        'barUid' : Long,
+        'barName' : String ,
+        'barLocation' : String,
+        'barPics' : Multipartfile,
+        'barMood' : String,
+        'barPhone' : String
+}
+
+```
+
+<span style="color:brown">`리턴값`</span>
+
+|<span style="color:red"> -2 | <span style="color:red">0 </span>| 1 |
+| --- | --- | --- |
+| <span style="color:red">세션만료&로그인오류 | <span style="color:red">회원가입 실패</span> | 회원가입 성공 |
+
+---
+<br>
+
+> #### (관리자)칵테일 등록
+
+POST `/registCocktail`
+```js
+
+//칵테일 사진이 여러개 일시
+cocktailPics = []
+
+cocktailPic = {
+        'cocktailPic' : Multipartfile,
+        
+}
+for문..
+cocktailPics.append(cocktailPic)
+
+
+cocktail = {
+        'cocktailName' : String ,
+        'cocktailDetail' : String,
+        'recoUser' : int,       // 0: 입문자	1: 캐쥬얼드링커         2: 헤비드링커
+        'cocktailPic' : cocktailPics
+}
+
+
+
+/*-------------------------------------*/
+//칵테일 사진이 한개 일시
+
+
+cocktail = {
+        'cocktailName' : String ,
+        'cocktailDetail' : String,
+        'recoUser' : int,       // 0: 입문자	1: 캐쥬얼드링커         2: 헤비드링커
+        'cocktailPic' : Multipartfile
+}
+```
+
+<span style="color:brown">`리턴값`</span>
+
+| <span style="color:red">0 </span>| 1 |
+| --- | --- |
+ | <span style="color:red">등록 실패</span> | 등록 성공 |
+
+
+---
+<br>
