@@ -32,7 +32,6 @@ class DemoApplicationTests {
         //given
         LocalDateTime now = LocalDateTime.now();
         userRepository.save(User.builder()
-                .email("zagnit")
                 .userName("김자닛")
                 .userPhone("01048398349")
         		.build());
@@ -48,7 +47,6 @@ class DemoApplicationTests {
     @Test
     public void 엔티티로_바꾼다() {
     	UserDTO dto = UserDTO.builder()
-        .email("zagnit")
         .userName("김자닛")
         .userPhone("01048398349")
 		.build();

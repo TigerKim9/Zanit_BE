@@ -18,7 +18,6 @@ import io.swagger.annotations.Api;
 
 @Api
 @RestController
-@RequestMapping("/bar")
 public class BarAPIController {
 
 	BarRepository barRepository;
