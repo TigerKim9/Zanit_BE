@@ -56,7 +56,7 @@ public class Coupon extends BaseTimeEntity{
 	private int coverCharge;
 	
 	//쿠폰 유효기간
-	private LocalDateTime exp_date;
+	private LocalDateTime expDate;
 	
 	//사용 여부
 	private boolean used; //	0:미사용 1:사용
@@ -81,7 +81,7 @@ public class Coupon extends BaseTimeEntity{
 				.usedBar(usedBar)
 				.usedCocktail(usedCocktail)
 				.coverCharge(coverCharge)
-				.exp_date(exp_date)
+				.expDate(expDate)
 				.used(used)
 				.build();
 	}

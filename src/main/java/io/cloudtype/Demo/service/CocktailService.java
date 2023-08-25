@@ -17,10 +17,6 @@ public class CocktailService {
 	
 	
 
-	
-	
-	
-	
 	//칵테일 전체 조회
 	public List<CocktailDTO> cocktailList() {
 		List<Cocktail> cocktailAllList = cocktailRepository.findAll();
