@@ -6,7 +6,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.cloudtype.Demo.dto.BarDTO;
@@ -15,18 +14,25 @@ import io.cloudtype.Demo.repository.BarRepository;
 import io.cloudtype.Demo.security.CustomUserDetails;
 import io.cloudtype.Demo.service.BarService;
 import io.swagger.annotations.Api;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Api
 @RestController
+@Slf4j
+@RequiredArgsConstructor
 public class BarAPIController {
 
-	BarRepository barRepository;
+	private final BarRepository barRepository;
 
-	BarService barService;
+	private final BarService barService;
 
 	// 바 하나 클릭시 보여줄 바 정보
 	@GetMapping("/barInfo")
-	public BarDTO barInfo(@RequestBody Long barId) {
+	public BarDTO barInfo(
+			//@RequestBody 
+			Long barId) {
+		log.info("long barId= {}",barId);
 		BarDTO barDTO = barService.barDetail(barId);
 		return barDTO;
 	}

@@ -22,5 +22,7 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 	
 	List<Coupon> findByExpDateAfter(LocalDateTime sevenDays);
 	
+	String findCouponNameByCouponUid(Long couponUid);
+	
 	
 }

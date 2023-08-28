@@ -22,7 +22,7 @@ public class CocktailDTO {
 
 	
 	//칵테일이 있는 바
-	private Bar barUid;
+	private Long barUid;
 
 	//칵테일 이름
 	private String cocktailName;
@@ -43,7 +43,6 @@ public class CocktailDTO {
 	
 	public Cocktail toEntity() {
 		return Cocktail.builder()
-				.barUid(barUid)
 				.cocktailName(cocktailName)
 				.cocktailDetail(cocktailDetail)
 				.recoUser(recoUser)

@@ -16,6 +16,7 @@ import io.cloudtype.Demo.dto.CocktailDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 //바 Entity
@@ -23,6 +24,7 @@ import lombok.ToString;
 @Entity
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Cocktail {
 
@@ -48,12 +50,13 @@ public class Cocktail {
 	//칵테일 가격
 	private int cocktailPrice;
 	
-	@Column(columnDefinition = "0")
+	@Column
+	@ColumnDefault("false")
 	private boolean activated;
 	
 	public CocktailDTO toDto() {
 		return CocktailDTO.builder()
-				.barUid(barUid)
+				.barUid(barUid.getBarUid())
 				.cocktailName(cocktailName)
 				.cocktailDetail(cocktailDetail)
 				.recoUser(recoUser)

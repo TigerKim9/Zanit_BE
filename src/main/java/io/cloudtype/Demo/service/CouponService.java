@@ -37,8 +37,8 @@ public class CouponService {
 
 	}
 	
-	//매일 00시 00분 일주일 넘은 쿠폰 유효기간이 만료
-	@Scheduled(cron = "0 0 0 * * *")
+	//매일 12시 00분 일주일 넘은 쿠폰 유효기간이 만료
+	@Scheduled(cron = "0 0 12 * * *")
 	public void checkExpiredCoupon() {
 		try {
 			LocalDateTime sevenDays = LocalDateTime.of(0, 0, 7, 0, 0, 0);

@@ -18,6 +18,7 @@ import io.cloudtype.Demo.dto.CouponDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 //바 Entity
@@ -25,6 +26,7 @@ import lombok.ToString;
 @Entity
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @DynamicUpdate
 public class Coupon extends BaseTimeEntity{

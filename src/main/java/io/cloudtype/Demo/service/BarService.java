@@ -79,14 +79,16 @@ public class BarService {
 	//
 	// 칵테일 내용이 포함 된 특정 바(유저)
 	public BarDTO barDetail(Long barUid) {
+		log.info("barUid = {}",barUid);
 		Bar bar = barRepository.findById(barUid).get();
-		List<Cocktail> cocktailbyBarList = cocktailRepository.findTop5ByBarUidAndActivatedTrue(barUid);
-		List<CocktailDTO> cocktailList = new ArrayList<>();
-		for (Cocktail cocktails : cocktailbyBarList) {
-			cocktailList.add(cocktails.toDto());
-		}
+		log.info("bar = {}",bar);
+//		List<Cocktail> cocktailbyBarList = cocktailRepository.findTop5ByBarUidAndActivatedTrue(barUid);
+//		List<CocktailDTO> cocktailList = new ArrayList<>();
+//		for (Cocktail cocktails : cocktailbyBarList) {
+//			cocktailList.add(cocktails.toDto());
+//		}
 		BarDTO barDTO = bar.toDto();
-		barDTO.setBarsCocktail(cocktailList);
+//		barDTO.setBarsCocktail(cocktailList);
 		return barDTO;
 	}
 	//admin 바 등록 

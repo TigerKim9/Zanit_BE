@@ -11,14 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 import io.cloudtype.Demo.dto.CocktailDTO;
 import io.cloudtype.Demo.repository.CocktailRepository;
 import io.cloudtype.Demo.service.CocktailService;
+import io.cloudtype.Demo.service.CouponService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
+@RequiredArgsConstructor
 @Slf4j
 public class CocktailAPIController {
 
-	CocktailRepository cocktailRepository;
-	CocktailService cocktailService;
+	private final CocktailRepository cocktailRepository;
+	private final CocktailService cocktailService;
 
 	//칵테일 {하나?} 등록 (관리자)
 	@PostMapping("/registCocktail")
@@ -33,6 +36,12 @@ public class CocktailAPIController {
 	@GetMapping("/getCocktailList")
 	public List<CocktailDTO> getCocktailList() {
 		List<CocktailDTO> cocktailList = cocktailService.cocktailList();
+		return cocktailList;
+	}
+	
+	@GetMapping("/searchCocktail")
+	public List<CocktailDTO> searchCocktail(String cocktailName){
+		List<CocktailDTO> cocktailList = cocktailService.searchCocktails(cocktailName);
 		return cocktailList;
 	}
 }

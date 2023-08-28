@@ -7,11 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 //바사진 Entity
@@ -19,6 +21,7 @@ import lombok.ToString;
 @Entity
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class BarPic {
 
@@ -31,6 +34,9 @@ public class BarPic {
 	@JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	private Bar barUid;
 	
+	@Lob
+	private String barPicBinary;
+
 	//바 사진 경로
 	private String barPicture;
 	
