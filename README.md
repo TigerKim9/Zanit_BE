@@ -79,6 +79,29 @@ result.cocktailPic              //MultiPartfile칵테일 사진
 
 ---
 <br>
+> #### (유저)칵테일 전체 리스트
+
+GET `/searchCocktail?cocktailName=value`
+
+```js
+    String
+```
+<span style="color:brown">`리턴값`</span>
+
+```js
+result.barUid                   //Long 칵테일이 있는 바
+result.cocktailName             //String 칵테일 이름
+result.cocktailDetail           //String 칵테일 설명
+result.recoUser                 //int 사용자 추천 유형
+result.cocktailPrice            //int 칵테일 가격
+result.cocktailPic              //MultiPartfile칵테일 사진
+
+```
+
+---
+<br>
+
+
 
 > #### (유저)쿠폰 사용하기
 
