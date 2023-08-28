@@ -35,12 +35,12 @@ POST `/subscribePay`
 
 > #### (유저)클릭한 바 하나의 정보
 
-GET `/barInfo`
+GET `/barInfo?barId=value`
 
 ```js
-barId = {
-        'barId' : Long,
-}
+//barId = {
+//        'barId' : Long,
+//}
 ```
 <span style="color:brown">`리턴값`</span>
 
