@@ -79,7 +79,8 @@ result.cocktailPic              //MultiPartfile칵테일 사진
 
 ---
 <br>
-> #### (유저)칵테일 전체 리스트
+
+> #### (유저)칵테일 검색
 
 GET `/searchCocktail?cocktailName=value`
 
