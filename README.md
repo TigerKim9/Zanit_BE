@@ -1,4 +1,20 @@
  ---
+>#### (유저) 유저 로그인
+
+
+POST `/loginOk`
+
+```
+  //form
+id : name="userphone"
+pw : name="userpassword"
+
+```
+
+- - -
+<br>
+ 
+ ---
 >#### (유저) 유저 회원가입
 
 
