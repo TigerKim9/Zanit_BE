@@ -6,8 +6,8 @@ POST `/loginOk`
 
 ```
   //form
-id : name="userphone"
-pw : name="userpassword"
+id : <input name="userphone">
+pw : <input name="userpassword">
 
 ```
 
