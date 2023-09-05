@@ -157,14 +157,7 @@ coupon = {
 POST `/usedCouponList`
 
 ```js
-coupon = {
-        "couponUid" : Long,
-        "userUid" : Long,      //백에서 로그인된 유저값을 넣을 수도 있음...향후 결정
-        "usedBar" : Long,
-        "usedCocktail" : Long,
-        "coverCharge" : int,
-
-}
+```
 
 ---
 
