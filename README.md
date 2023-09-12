@@ -1,4 +1,29 @@
  ---
+>#### (유저) 유저 로그인
+
+
+POST `/loginOk`
+
+```
+  //form
+id : <input name="userphone">
+pw : <input name="userpassword">
+
+```
+
+<br>
+
+ ---
+ 
+>#### (유저) 유저 로그아웃
+
+
+POST `/logout`
+
+<br>
+ 
+ ---
+ 
 >#### (유저) 유저 회원가입
 
 
@@ -127,7 +152,14 @@ coupon = {
 
 ---
 
+> #### (유저) 쿠폰 이용 내역
 
+POST `/usedCouponList`
+
+```js
+```
+
+---
 
 
 
