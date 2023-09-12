@@ -19,5 +19,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	User findByUserPhone(String userPhone);
 	
 	// 특정 id 의 권한(들) 정보 가져오기
-	List<String> findAuthoritiesByUserUid(Long userUid);
+	User findRoleByUserUid(Long userUid);
+	
+	List<UserInfoMapping> findByUserUid(Long userUid);
+	
+	public interface UserInfoMapping {
+		String getUserName();
+		String getUserPhone();
+	}
 }

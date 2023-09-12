@@ -56,7 +56,7 @@ public class Bar {
 				.barUid(barUid)
 				.barName(barLocation)
 				.barMood(barMood)
-				.barOwner(barOwner)
+				.barOwner(barOwner.getUserUid())
 				.barPhone(barPhone)
 				.build();
 	}

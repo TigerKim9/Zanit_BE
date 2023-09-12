@@ -1,11 +1,13 @@
 package io.cloudtype.Demo.controller;
 
+
 import java.io.IOException;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.cloudtype.Demo.dto.BarDTO;
@@ -19,24 +21,41 @@ import lombok.extern.slf4j.Slf4j;
 
 @Api
 @RestController
-@Slf4j
+@RequestMapping("/admin")
 @RequiredArgsConstructor
-public class BarAPIController {
-
+@Slf4j
+public class AdminController {
+	
+	private final BarService barService;
+	
 	private final BarRepository barRepository;
 
-	private final BarService barService;
-
 	// 바 하나 클릭시 보여줄 바 정보
-	@GetMapping("/barInfo")
+	@GetMapping("/adminsBar")
 	public BarDTO barInfo(
-			//@RequestBody 
-			Long barId) {
-		log.info("long barId= {}",barId);
-		BarDTO barDTO = barService.barDetail(barId);
+			// @RequestBody
+			Long userId) {
+		log.info("Admins userId= {}", userId);
+		BarDTO barDTO = barService.adminsBar(userId);
 		return barDTO;
 	}
+	
+	/*------------------------------------------------------admin----------------------------------*/
 
+	@PostMapping("/registBar")
+	public int registBar(@RequestBody BarDTO barDTO,
+			@AuthenticationPrincipal CustomUserDetails user) {
+		if(user == null) return -2;
+		barDTO.setBarOwner(user.getUser().getUserUid());
+		int result = 0;
+		try {
+			Bar bar = barService.barRegist(barDTO);
+			result = barRepository.countByBarUid(bar.getBarUid());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
+		return result;
+	}
 
 }

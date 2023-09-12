@@ -38,6 +38,7 @@ public class UserService {
 	
 	@Transactional
 	public void addMember(UserDTO userDTO) {
+		log.info("새로들어온 패스워드 : {}",userDTO.getUserPassword());
 		userDTO.setUserPassword(passwordEncoder.encode(userDTO.getUserPassword()));
 		User user = userDTO.toEntity();
 		

@@ -1,12 +1,12 @@
 package io.cloudtype.Demo.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import io.cloudtype.Demo.entity.Bar;
-import io.cloudtype.Demo.entity.Cocktail;
 
 @Repository
 public interface BarRepository extends JpaRepository<Bar, Long> {
@@ -19,4 +19,7 @@ public interface BarRepository extends JpaRepository<Bar, Long> {
 	
 	//바 분위기로 검색
 	List<Bar> findByBarMood(String barMood);
+	
+	//관리자 단 바 정보
+	Optional<Bar> findByBarOwner(Long userId);
 }

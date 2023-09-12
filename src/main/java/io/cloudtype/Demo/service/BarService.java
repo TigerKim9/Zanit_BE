@@ -64,10 +64,10 @@ public class BarService {
 	}
 	
 	//하나의 바 정보(관리자단)
-	public BarDTO oneBar(Long barUid) {
-		BarDTO barDTO = barRepository.findById(barUid).get().toDto();
+	public BarDTO adminsBar(Long userId) {
+		BarDTO barDTO = barRepository.findByBarOwner(userId).get().toDto();
 		
-		List<Cocktail> cocktailbyBarList = cocktailRepository.findByBarUid(barUid);
+		List<Cocktail> cocktailbyBarList = cocktailRepository.findByBarUid(userId);
 		List<CocktailDTO> cocktailList = new ArrayList<>();
 		for (Cocktail cocktails : cocktailbyBarList) {
 			cocktailList.add(cocktails.toDto());

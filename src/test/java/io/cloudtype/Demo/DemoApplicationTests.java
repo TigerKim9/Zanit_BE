@@ -67,7 +67,8 @@ class DemoApplicationTests {
     	
 //    	String uid = couponRepository.findCouponNameByCouponUid(1L);
     	List<Coupon> couponList = couponRepository.findByUserUid(1L);
-
+    	
+    	
     	System.out.println(userCount);
 //    	System.out.println(uid);
     	log.info("User uid = {}",userCount);

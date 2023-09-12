@@ -23,7 +23,7 @@ public class CustomUserDetails implements UserDetails {
 	private User user;
 
 	public CustomUserDetails(User user) {
-		log.info("PrincipalDetails(user) 생성: {}",user);
+		log.info("PrincipalDetails(user) 생성: {}", user);
 		this.user = user;
 	}
 
@@ -33,17 +33,18 @@ public class CustomUserDetails implements UserDetails {
 
 		Collection<GrantedAuthority> collect = new ArrayList<>();
 
-		List<String> list = userRepository.findAuthoritiesByUserUid(user.getUserUid());
-
-		for (String auth : list) {
+		User list = userRepository.findRoleByUserUid(user.getUserUid());
+		log.info("USER = == = = {}", list);
+		log.info("USER.getROLE = == = = {}", list.getRole());
+//		for (String auth : list) {
 			collect.add(new GrantedAuthority() {
 
 				@Override
 				public String getAuthority() {
-					return auth;
+					return list.getRole();
 				}
 			});
-		}
+//		}
 
 		return collect;
 	}
@@ -88,6 +89,5 @@ public class CustomUserDetails implements UserDetails {
 		// 사이트에서 1년동안 회원이 로그인을 안하면 휴면계정으로 하기로 했다면?
 		// 현재시간 - 로그인시간 => 1년을 초과하면 false
 	}
-
 
 }

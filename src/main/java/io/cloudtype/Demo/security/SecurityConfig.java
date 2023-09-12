@@ -1,7 +1,10 @@
 package io.cloudtype.Demo.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,13 +18,16 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfig{
 	
 	private final CorsConfig corsConfig;
-	private final CustomUserDetailsService customUserDetailsService;
+	
+    
+    
+	@Autowired 
+	private CustomUserDetailsService customUserDetailsService;
 	
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http	
         .csrf().disable()
-        .addFilter(corsConfig.corsFilter())
         .authorizeRequests()
 //                .antMatchers("/design","orders")
 //                .hasRole("USER")
@@ -35,10 +41,10 @@ public class SecurityConfig{
                 .and()
                 .formLogin()
 				.loginPage("/login")
-				.usernameParameter("useremail")
+				.usernameParameter("userphone")
 				.passwordParameter("userpassword")
 				.loginProcessingUrl("/loginOk")
-				.defaultSuccessUrl("/")
+				.defaultSuccessUrl("/home")
 				.and()
 				.rememberMe()
 				.key("secret")
@@ -69,37 +75,11 @@ public class SecurityConfig{
 		public BCryptPasswordEncoder encoder() {
 			return new BCryptPasswordEncoder();
 		}
-//		
-//		
-//		@Override
-//		protected void configure(HttpSecurity http) throws Exception {
-//			http.csrf().disable();   // CSRF 비활성화
-//			http.authorizeRequests()
-//				.antMatchers("/landing/user/**").authenticated()
-//				.antMatchers("/landing/admin/**").access("hasRole('ROLE_ADMIN')")
-//				.anyRequest().permitAll()
-//				.and()
-//				.formLogin()
-//				.loginPage("/login")
-//				.usernameParameter("userid")
-//				.passwordParameter("userpassword")
-//				.loginProcessingUrl("/loginOk")
-//				.defaultSuccessUrl("/")
-//				.and()
-//				.rememberMe()
-//				.key("secret")
-//				.rememberMeParameter("autoLogin")
-//				.tokenValiditySeconds(86400)
-//				
-////				.userDetailsService()
-//				.and()
-//				.logout()
-//				.logoutUrl("/logout")
-//				.invalidateHttpSession(true)
-//				
-//				
-//				
-//				;
-//		}
+
+		@Bean
+		AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+				throws Exception {
+			return authenticationConfiguration.getAuthenticationManager();
+		}
 
 }

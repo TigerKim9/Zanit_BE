@@ -41,7 +41,7 @@ public class BarDTO {
 	private List<CocktailDTO> barsCocktail;
 	
 	//바 주인 (유저)
-	private User barOwner;
+	private Long barOwner;
 	
 	//바 전화번호
 	private String barPhone;
@@ -51,7 +51,6 @@ public class BarDTO {
 				.barUid(barUid)
 				.barName(barLocation)
 				.barMood(barMood)
-				.barOwner(barOwner)
 				.barPhone(barPhone)
 				.build();
 	}
