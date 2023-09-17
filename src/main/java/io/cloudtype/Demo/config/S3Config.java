@@ -13,10 +13,10 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 @Configuration
 public class S3Config {
 //    @Value("${cloud.aws.credentials.accessKey}")
-    @Value("${ACCESS_KEY}")
+    @Value("AKIA2FGBVWFCC7ISEQVK")
     private String accessKey;
 //    @Value("${cloud.aws.credentials.secretKey}")
-    @Value("${SECRET_KEY}")
+    @Value("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")
     private String secretKey;
     @Value("zanit")
     private String bucketName;

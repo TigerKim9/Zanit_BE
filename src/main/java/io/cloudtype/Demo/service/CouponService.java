@@ -95,6 +95,7 @@ public class CouponService {
 		}
 	}
 
+	//어느 바에서 사용 된 쿠폰
 	public List<CouponDTO> orderList(Long userUid, Long barUid) {
 		// TODO 구독을 하지 않았거나 쿠폰이 없을 때 리턴할 값
 		if (checkSubscribe(userUid)) {

@@ -11,7 +11,6 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.cloudtype.Demo.entity.BarPic;
-import io.cloudtype.Demo.entity.BarPicDTO;
 
 @Component
 public class FileHandler {

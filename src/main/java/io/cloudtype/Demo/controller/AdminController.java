@@ -68,7 +68,9 @@ public class AdminController {
 	public List<CouponDTO> orderList(@AuthenticationPrincipal CustomUserDetails user){
 		Long userUid = user.getUser().getUserUid();
 		
-		return couponService.usedCoupons(userUid);
+		Long barUid = barRepository.findByBarOwner(userUid).get().getBarUid();
+		
+		return couponService.orderList(userUid, barUid);
 		
 	}
 }

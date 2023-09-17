@@ -17,7 +17,6 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 
 import io.cloudtype.Demo.dto.BarDTO;
-import io.cloudtype.Demo.entity.Bar;
 import io.cloudtype.Demo.repository.BarRepository;
 import io.cloudtype.Demo.security.CustomUserDetails;
 import io.cloudtype.Demo.service.BarService;
