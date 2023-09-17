@@ -36,6 +36,8 @@ public class BarDTO {
 	
 	//바 분위기
 	private String barMood;
+	//바 설명(공간 설명)
+	private String barDetail;
 	
 	//바에 있는 칵테일
 	private List<CocktailDTO> barsCocktail;
@@ -46,12 +48,16 @@ public class BarDTO {
 	//바 전화번호
 	private String barPhone;
 	
+	private String coverCharge;
+	
 	public Bar toEntity() {
 		return Bar.builder()
 				.barUid(barUid)
 				.barName(barLocation)
 				.barMood(barMood)
+				.barDetail(barDetail)
 				.barPhone(barPhone)
+				.coverCharge(coverCharge)
 				.build();
 	}
 }

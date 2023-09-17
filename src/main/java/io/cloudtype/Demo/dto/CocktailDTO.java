@@ -39,6 +39,8 @@ public class CocktailDTO {
 	//칵테일 사진
 	private MultipartFile cocktailPic;
 	
+	private String cocktailPicPath;
+	
 	private boolean activated;
 	
 	public Cocktail toEntity() {
@@ -47,6 +49,7 @@ public class CocktailDTO {
 				.cocktailDetail(cocktailDetail)
 				.recoUser(recoUser)
 				.cocktailPrice(cocktailPrice)
+				.cocktailPic(cocktailPicPath)
 				.activated(activated)
 				.build();
 	}

@@ -2,6 +2,7 @@ package io.cloudtype.Demo.controller;
 
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.cloudtype.Demo.dto.BarDTO;
+import io.cloudtype.Demo.dto.CouponDTO;
 import io.cloudtype.Demo.entity.Bar;
 import io.cloudtype.Demo.repository.BarRepository;
 import io.cloudtype.Demo.security.CustomUserDetails;
 import io.cloudtype.Demo.service.BarService;
+import io.cloudtype.Demo.service.CouponService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +30,8 @@ import lombok.extern.slf4j.Slf4j;
 public class AdminController {
 	
 	private final BarService barService;
+	
+	private final CouponService couponService;
 	
 	private final BarRepository barRepository;
 
@@ -58,4 +63,12 @@ public class AdminController {
 		return result;
 	}
 
+	
+	@GetMapping("/orderList")
+	public List<CouponDTO> orderList(@AuthenticationPrincipal CustomUserDetails user){
+		Long userUid = user.getUser().getUserUid();
+		
+		return couponService.usedCoupons(userUid);
+		
+	}
 }

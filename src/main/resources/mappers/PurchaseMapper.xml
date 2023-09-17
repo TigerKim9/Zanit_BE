@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.cloudtype.Demo.mappers">
+
+	
+	
+	<select id="searchingPurchase" parameterType="HashMap" resultType="io.cloudtype.Demo.dto.BarDTO">
+		SELECT
+        p.purchase_id,
+        purchase_code,
+        p.purchase_name,
+        purchase_phone,
+        purchase_email,
+        purchase_manager,
+        COUNT(pmp.product_id) AS purchaseProductCount,
+        recent_purchase_date
+        FROM
+        purchase p LEFT JOIN purchase_managing_product pmp ON p.purchase_id = pmp.purchase_id
+        WHERE bar_mood = #{userId}	
+<!--		WHERE user_id = #{userId}-->
+		<trim prefix="AND" prefixOverrides="AND|OR">
+
+			<if test="searchType=='purchaseName' and keyword != null and keyword != '' ">
+				AND p.purchase_name like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='manager' and keyword != null and keyword != '' ">
+				AND p.purchase_manager like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='email' and keyword != null and keyword != '' ">
+				AND p.purchase_email like CONCAT('%', #{keyword}, '%')
+			</if>
+
+
+		</trim>
+		GROUP BY p.purchase_id
+		ORDER BY
+        purchase_id DESC
+        LIMIT
+        #{startIndex}, #{pageSize}
+	</select>
+    
+	
+</mapper>

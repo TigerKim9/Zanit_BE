@@ -44,6 +44,9 @@ public class Cocktail {
 	//칵테일 설명
 	private String cocktailDetail;
 	
+	//칵테일 사진 경로
+	private String cocktailPic;
+	
 	//사용자 추천 유형
 	private int recoUser;	//	0: 입문자	1: 캐쥬얼드링커 2: 헤비드링커
 	

@@ -17,6 +17,8 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 	//유저에 따른 쿠폰 사용이력
 	List<Coupon> findByUserUidAndUsedTrue(Long userUid);
 	
+	List<Coupon> findByUsedBarAndUsedTrue(Long barUid);
+
 	//유저에 따른 사용하지 않은 쿠폰
 	Coupon findByUserUidAndUsedFalse(Long userUid);
 	

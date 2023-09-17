@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.cloudtype.Demo.dto.CocktailDTO;
@@ -43,5 +45,24 @@ public class CocktailAPIController {
 	public List<CocktailDTO> searchCocktail(String cocktailName){
 		List<CocktailDTO> cocktailList = cocktailService.searchCocktails(cocktailName);
 		return cocktailList;
+	}
+	
+	@PostMapping("/registCocktails")
+	public int registBar2(@RequestParam Long barId,
+			@RequestPart List<CocktailDTO> cocktails ) throws Exception {
+		
+		int result = 0;
+		try {
+			for(CocktailDTO cocktail : cocktails) {
+				cocktail.setBarUid(barId);
+				cocktailService.registCocktail(cocktail);
+			}
+			result = 1;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+		
 	}
 }

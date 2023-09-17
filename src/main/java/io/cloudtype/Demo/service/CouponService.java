@@ -36,22 +36,22 @@ public class CouponService {
 		return result;
 
 	}
-	
-	//매일 12시 00분 일주일 넘은 쿠폰 유효기간이 만료
+
+	// 매일 12시 00분 일주일 넘은 쿠폰 유효기간이 만료
 	@Scheduled(cron = "0 0 12 * * *")
 	public void checkExpiredCoupon() {
 		try {
 			LocalDateTime sevenDays = LocalDateTime.of(0, 0, 7, 0, 0, 0);
 			List<Coupon> expOver = couponRepository.findByExpDateAfter(sevenDays);
-			
-			for(Coupon exp : expOver) {
+
+			for (Coupon exp : expOver) {
 				CouponDTO couponDto = exp.toDto();
 				couponDto.setUsed(true);
 				exp = couponDto.toEntity();
 				couponRepository.saveAndFlush(exp);
 			}
-			
-		}catch(Exception e){
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			log.info("검색된 쿠폰 없음.");
 		}
@@ -95,6 +95,23 @@ public class CouponService {
 		}
 	}
 
+	public List<CouponDTO> orderList(Long userUid, Long barUid) {
+		// TODO 구독을 하지 않았거나 쿠폰이 없을 때 리턴할 값
+		if (checkSubscribe(userUid)) {
+			List<Coupon> CouponSearchList = couponRepository.findByUsedBarAndUsedTrue(barUid);
+			List<CouponDTO> CouponList = new ArrayList<>();
+
+			for (Coupon Coupons : CouponSearchList) {
+				CouponList.add(Coupons.toDto());
+			}
+
+			return CouponList;
+		} else {
+			return null;
+		}
+
+	}
+
 	// 유저가 쿠폰 사용하기
 	// 사용 성공여부 반환
 	@Transactional
@@ -106,6 +123,7 @@ public class CouponService {
 			Coupon coupon = couponRepository.findByUserUidAndUsedFalse(userUid);
 			coupon.useBar(barUid);
 			coupon.useCocktail(cocktailUid);
+			coupon.useTime(LocalDateTime.now());
 			coupon.changeUsed(true);
 			return true;
 		} else {

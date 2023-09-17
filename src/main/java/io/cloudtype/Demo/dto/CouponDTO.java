@@ -43,6 +43,9 @@ public class CouponDTO extends BaseTimeEntity{
 	//쿠폰 유효기간
 	private LocalDateTime expDate;
 	
+	//쿠폰 유효기간
+	private LocalDateTime usedTime;
+	
 	//사용 여부
 	private boolean used;//	0:미사용	1:사용
 	

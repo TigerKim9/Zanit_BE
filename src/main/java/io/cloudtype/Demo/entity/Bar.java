@@ -43,6 +43,9 @@ public class Bar {
 	//바 분위기
 	private String barMood;
 	
+	//바 설명(공간 설명)
+	private String barDetail;
+	
 	//바 주인 (유저)
 	@ManyToOne
 	@JoinColumn(name="bar_owner",foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
@@ -51,13 +54,17 @@ public class Bar {
 	//바 전화번호
 	private String barPhone;
 	
+	private String coverCharge;
+	
 	public BarDTO toDto() {
 		return BarDTO.builder()
 				.barUid(barUid)
-				.barName(barLocation)
+				.barName(barName)
+				.barLocation(barLocation)
 				.barMood(barMood)
-				.barOwner(barOwner.getUserUid())
+//				.barOwner(barOwner.getUserUid())
 				.barPhone(barPhone)
+				.coverCharge(coverCharge)
 				.build();
 	}
 }

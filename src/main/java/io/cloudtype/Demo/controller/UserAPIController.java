@@ -1,6 +1,5 @@
 package io.cloudtype.Demo.controller;
 
-import java.net.http.HttpRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cloudtype.Demo.dto.CouponDTO;
 import io.cloudtype.Demo.dto.UserDTO;
 import io.cloudtype.Demo.entity.User;
 import io.cloudtype.Demo.repository.UserRepository;

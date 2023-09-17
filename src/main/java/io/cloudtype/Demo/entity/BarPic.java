@@ -33,12 +33,15 @@ public class BarPic {
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	private Bar barUid;
+	private Long barUids;
 	
 	@Lob
 	private String barPicBinary;
 
 	//바 사진 경로
 	private String barPicture;
+	//바 사진 원본이름
+	private String barPictureOriginalName;
 	
 	public BarPicDTO toDto() {
 		
@@ -46,6 +49,7 @@ public class BarPic {
 				.barPicUid(barPicUid)
 				.barUid(barUid)
 				.barPicture(barPicture)
+				.barPictureOriginalName(barPictureOriginalName)
 				.build();
 	}
 }

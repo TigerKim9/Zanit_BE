@@ -25,6 +25,8 @@ public class BarPicDTO {
 	//바 사진 경로
 	private String barPicture;
 	
+	private String barPictureOriginalName;
+	
 	public BarPic toEntity() {
 		
 		return BarPic.builder()

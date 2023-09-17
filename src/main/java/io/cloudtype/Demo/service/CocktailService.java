@@ -1,8 +1,14 @@
 package io.cloudtype.Demo.service;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 
 import io.cloudtype.Demo.dto.CocktailDTO;
 import io.cloudtype.Demo.entity.Cocktail;
@@ -14,6 +20,16 @@ import lombok.RequiredArgsConstructor;
 public class CocktailService {
 	
 	private final CocktailRepository cocktailRepository;
+	
+
+	private final AmazonS3 amazonS3;
+	
+	private final ImageS3Service imageS3Service;
+	
+//	@Value("${cloud.aws.s3.bucket}")
+	@Value("zanit")
+	private String bucket;
+	
 	
 	
 
@@ -54,11 +70,31 @@ public class CocktailService {
 	}
 	
 	public Long registCocktail(CocktailDTO cocktailDTO) {
-		
-		Cocktail cocktail = cocktailDTO.toEntity();
-		//TODO 세이브 후 바로 반영이 되었나 확인하기
-		Long result = cocktailRepository.save(cocktail).getCocktailUid();
-		return result;
+		Cocktail cocktail = new Cocktail();
+		try {
+			MultipartFile file = cocktailDTO.getCocktailPic();
+			
+			String fileName = file.getOriginalFilename();
+			//S3 버킷 + 폴더명
+			fileName = imageS3Service.changedImageName(fileName);
+			String buckets = bucket + "/barPics";
+			String fileUrl = "https://" + buckets + "s3." + "https://zanit.s3.ap-northeast-2.amazonaws.com/" + fileName;
+			
+			ObjectMetadata metadata = new ObjectMetadata();
+			metadata.setContentType(file.getContentType());
+			metadata.setContentLength(file.getSize());
+			
+			amazonS3.putObject(buckets, fileName, file.getInputStream(), metadata);
+			String result = amazonS3.getUrl(buckets, fileName).toString();
+			cocktailDTO.setCocktailPicPath(result);
+			cocktail = cocktailDTO.toEntity();
+			cocktailRepository.save(cocktail);
+			Long cocktailId = cocktailRepository.save(cocktail).getCocktailUid();
+			return cocktailId;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return 0l;
 	}
 }
 
