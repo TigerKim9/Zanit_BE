@@ -53,12 +53,8 @@ public class AdminController {
 		if(user == null) return -2;
 		barDTO.setBarOwner(user.getUser().getUserUid());
 		int result = 0;
-		try {
-			Bar bar = barService.barRegist(barDTO);
-			result = barRepository.countByBarUid(bar.getBarUid());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Long bar = barService.registBar(barDTO);
+		result = barRepository.countByBarUid(bar);
 
 		return result;
 	}
